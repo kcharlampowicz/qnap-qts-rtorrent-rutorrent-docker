@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ -f /root/.rtorrent.rc ]; then
+  rm /root/.rtorrent.rc
+fi
+
+if [ -f /download/rtorrent.rc ]; then
+  ln -s /download/rtorrent.rc /root/.rtorrent.rc
+fi
+
+rm -rf /root/.session/rtorrent.lock
+
+lighttpd -f /etc/lighttpd/lighttpd.conf
+
+rtorrent
