@@ -1,6 +1,8 @@
 # qnap-qts-rtorrent-rutorrent-docker
 rTorrent with ruTorrent as a docker image for qnap qts container station
 
+Image is also available on dockerhub: https://hub.docker.com/r/harek/rtorrent-rutorrent-qnap-qts/
+
 Docker image with rTorrent/ruTorrent created for qnap qts
 
 To run this on your qnap nas:
@@ -24,4 +26,4 @@ To run this on your qnap nas:
   - Optionaly: you should change auto port to some fixed ports in network tab
 10. Save created image in conatainer station
 
-:)
+Enjoy :)
