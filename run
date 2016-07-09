@@ -10,8 +10,12 @@ if [ -f /download/rtorrent.rc ]; then
   ln -s /download/rtorrent.rc /root/.rtorrent.rc
 fi
 
+if [ ! -f /download/httppassword ]; then
+  ln -s /root/httppassword /download/httppassword
+fi
+
 rm -rf /download/rtorrent/session/rtorrent.lock
 
 lighttpd -f /etc/lighttpd/lighttpd.conf
 
-rtorrent
+tmux new -s rtorrent rtorrent

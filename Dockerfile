@@ -3,22 +3,26 @@ FROM vsense/baseimage:alpine
 
 MAINTAINER Kamil Charlampowicz "kamil.charlampowicz@gmail.com"
 
-RUN apk --update add rtorrent openvpn lighttpd php php-cgi php-json curl gzip zip ffmpeg geoip unrar libmediainfo@testing fcgi git
+RUN apk --update add rtorrent openvpn lighttpd lighttpd-mod_auth php php-cgi php-json curl gzip zip ffmpeg geoip unrar fcgi git tmux
 
 ADD run /root/
-RUN chmod +x /root/run
+ADD httppassword /root
+ADD auth-lighthttpd /root
 
-RUN echo 'include "mod_fastcgi.conf"' >> /etc/lighttpd/lighttpd.conf
+RUN chmod +x /root/run \
+  && echo 'include "mod_fastcgi.conf"' >> /etc/lighttpd/lighttpd.conf \
+  && cat /root/auth-lighthttpd >> /etc/lighttpd/lighttpd.conf
 
 # setup rutorrent
-RUN git init /var/www/localhost/htdocs
-RUN cd /var/www/localhost/htdocs && git remote add origin https://github.com/Novik/ruTorrent.git
-RUN cd /var/www/localhost/htdocs && git pull origin master
-RUN chmod -R 777 /var/www/localhost/htdocs/share/
+RUN git init /var/www/localhost/htdocs \
+  && cd /var/www/localhost/htdocs \
+  && git remote add origin https://github.com/Novik/ruTorrent.git \
+  && cd /var/www/localhost/htdocs && git pull origin master \
+  && chmod -R 777 /var/www/localhost/htdocs/share/
 
 # setup lighttpd
-RUN mkdir -p /var/run/lighttpd /run/lighttpd
-RUN chown lighttpd /var/run/lighttpd /run/lighttpd
+RUN mkdir -p /var/run/lighttpd /run/lighttpd \
+  && chown lighttpd /var/run/lighttpd /run/lighttpd
 
 EXPOSE 49161
 EXPOSE 80

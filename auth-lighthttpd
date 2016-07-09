@@ -1,0 +1,8 @@
+server.modules += ( "mod_auth" )
+auth.backend = "plain"
+auth.backend.plain.userfile = "/download/httppassword"
+auth.require = ("/" => (
+  "method"  => "basic",
+  "realm"   => "whatever",
+  "require" => "valid-user"
+))
