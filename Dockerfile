@@ -3,7 +3,7 @@ FROM vsense/baseimage:alpine
 
 MAINTAINER Kamil Charlampowicz "kamil.charlampowicz@gmail.com"
 
-RUN apk --update add rtorrent openvpn lighttpd lighttpd-mod_auth php php-cgi php-json curl gzip zip ffmpeg geoip unrar fcgi git tmux
+RUN apk --update add rtorrent openvpn lighttpd lighttpd-mod_auth php php-cgi php-json curl gzip zip ffmpeg geoip unrar fcgi git
 
 ADD run /root/
 ADD httppassword /root

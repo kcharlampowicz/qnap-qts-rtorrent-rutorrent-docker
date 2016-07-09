@@ -18,4 +18,4 @@ rm -rf /download/rtorrent/session/rtorrent.lock
 
 lighttpd -f /etc/lighttpd/lighttpd.conf
 
-tmux new -s rtorrent rtorrent
+rtorrent
